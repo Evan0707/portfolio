@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import wave from '@/public/Layer_1 1.png'
+import wave from '@/public/Layer_1 1.webp'
 import menu from '@/public/Menu.svg'
 import close from '@/public/Close.svg'
 import { useState } from "react";
@@ -145,7 +145,7 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
               className="flex items-baseline justify-end -mt-4 md:-mt-8"
             >
-              <span className="font-[family-name:var(--font-dela-gothic-one)] text-[18vw] md:text-[12vw] leading-none tracking-tight">
+              <span className="font-[family-name:var(--font-dela-gothic-one)] text-[18vw] md:text-[12vw] leading-none tracking-tight z-50">
                 FOLIO
               </span>
             </motion.div>
