@@ -39,6 +39,59 @@ export default function Home() {
   const [showMenu, setShowMenu] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
 
+  // Contact form states
+  const [formEmail, setFormEmail] = useState('')
+  const [formMessage, setFormMessage] = useState('')
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [formFeedback, setFormFeedback] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!formEmail || !formMessage) {
+      setFormStatus('error')
+      setFormFeedback('Veuillez remplir tous les champs.')
+      return
+    }
+
+    setFormStatus('loading')
+    setFormFeedback('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: formEmail,
+          message: formMessage,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setFormStatus('success')
+        setFormFeedback('Message envoyé avec succès! Je vous répondrai bientôt.')
+        setFormEmail('')
+        setFormMessage('')
+
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus('idle')
+          setFormFeedback('')
+        }, 5000)
+      } else {
+        setFormStatus('error')
+        setFormFeedback(data.error || 'Une erreur est survenue.')
+      }
+    } catch (error) {
+      setFormStatus('error')
+      setFormFeedback('Erreur de connexion. Veuillez réessayer.')
+    }
+  }
+
   const { scrollY } = useScroll()
   const portY = useTransform(scrollY, [0, 500], [0, -50])
   const folioY = useTransform(scrollY, [0, 500], [0, 50])
@@ -472,27 +525,58 @@ export default function Home() {
           </div>
 
           {/* Form */}
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="text-xs text-white/40 uppercase tracking-widest block mb-2">Your Email</label>
               <input
                 type="email"
-                className="w-full bg-transparent border-b border-white/20 pb-3 text-white focus:border-white/60 focus:outline-none transition-colors"
+                value={formEmail}
+                onChange={(e) => setFormEmail(e.target.value)}
+                disabled={formStatus === 'loading'}
+                className="w-full bg-transparent border-b border-white/20 pb-3 text-white focus:border-white/60 focus:outline-none transition-colors disabled:opacity-50"
                 placeholder="hello@example.com"
+                required
               />
             </div>
             <div>
               <label className="text-xs text-white/40 uppercase tracking-widest block mb-2">Message</label>
               <textarea
-                className="w-full bg-transparent border-b border-white/20 pb-3 text-white focus:border-white/60 focus:outline-none transition-colors resize-none h-32"
+                value={formMessage}
+                onChange={(e) => setFormMessage(e.target.value)}
+                disabled={formStatus === 'loading'}
+                className="w-full bg-transparent border-b border-white/20 pb-3 text-white focus:border-white/60 focus:outline-none transition-colors resize-none h-32 disabled:opacity-50"
                 placeholder="Tell me about your project..."
+                required
               ></textarea>
             </div>
+
+            {/* Feedback Message */}
+            {formFeedback && (
+              <motion.p
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`text-sm ${formStatus === 'success' ? 'text-green-400' : 'text-red-400'}`}
+              >
+                {formFeedback}
+              </motion.p>
+            )}
+
             <button
               type="submit"
-              className="mt-4 px-8 py-3 border border-white/30 text-white/80 hover:bg-white hover:text-black transition-all duration-300 tracking-wider text-sm"
+              disabled={formStatus === 'loading'}
+              className="mt-4 px-8 py-3 border border-white/30 text-white/80 hover:bg-white hover:text-black transition-all duration-300 tracking-wider text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-white/80 flex items-center gap-2"
             >
-              SEND MESSAGE
+              {formStatus === 'loading' ? (
+                <>
+                  <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  SENDING...
+                </>
+              ) : (
+                'SEND MESSAGE'
+              )}
             </button>
           </form>
         </div>
