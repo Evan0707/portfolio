@@ -516,6 +516,12 @@ export default function Home() {
               </Link>
             </div>
             <div>
+              <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Malt</p>
+              <Link href="https://www.malt.fr/profile/evang1" target="_blank" className="text-lg text-white/80 hover:text-white transition-colors">
+                View Profile →
+              </Link>
+            </div>
+            <div>
               <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Status</p>
               <p className="text-lg text-white/80 flex items-center gap-2">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
