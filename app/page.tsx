@@ -253,11 +253,10 @@ export default function Home() {
       <div id="projects" ref={projectsRef} className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]">
         <GradualSpacing text="PROJECTS" />
 
-        {/* Scroll Container */}
+        {/* Projects Container */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-scroll scrollbar-hide pb-8 -mx-[5vw] md:-mx-[7.3vw] px-[5vw] md:px-[7.3vw] justify-center"
-          style={{ scrollBehavior: 'smooth' }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
 
           {/* Project Card 1 */}
@@ -270,7 +269,7 @@ export default function Home() {
           >
             <TiltCard
               onClick={() => window.open('https://lekebabiste.com', '_blank')}
-              className="w-[300px] md:w-[380px] cursor-pointer group"
+              className="w-full cursor-pointer group"
             >
               <div className="aspect-[4/3] bg-[url(@/public/leKebabsite.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
               <div className="mt-4">
@@ -295,7 +294,7 @@ export default function Home() {
             className="flex-shrink-0"
           >
             <TiltCard
-              className="w-[300px] md:w-[380px] cursor-pointer group"
+              className="w-full cursor-pointer group"
             >
               <div className="aspect-[4/3] bg-[url(@/public/SFK.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
               <div className="mt-4">
@@ -321,7 +320,7 @@ export default function Home() {
           >
             <TiltCard
               onClick={() => window.open('https://payko.app/', '_blank')}
-              className="w-[300px] md:w-[380px] cursor-pointer group"
+              className="w-full cursor-pointer group"
             >
               <div className="aspect-[4/3] bg-[url(@/public/payko_project.png)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
               <div className="mt-4">
@@ -354,11 +353,13 @@ export default function Home() {
         </div>
 
         {/* Skills Marquee */}
-        <div className="mt-16 relative">
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0b] to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0b] to-transparent z-10"></div>
-
+        <div
+          className="mt-16 relative"
+          style={{
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          }}
+        >
           {/* Scrolling container */}
           <motion.div
             className="flex gap-16 md:gap-24"
