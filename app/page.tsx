@@ -8,6 +8,10 @@ import { motion, useScroll, useTransform, AnimatePresence, useInView } from 'fra
 import * as React from 'react';
 import Link from "next/link";
 import MouseGrid from "./components/MouseGrid";
+import ThemeToggle from "./components/ThemeToggle";
+import AnimatedCounter from "./components/AnimatedCounter";
+import MagneticButton from "./components/MagneticButton";
+import TiltCard from "./components/TiltCard";
 
 
 function GradualSpacing({ text = 'Gradual Spacing' }: { text: string }) {
@@ -50,7 +54,7 @@ export default function Home() {
 
     if (!formEmail || !formMessage) {
       setFormStatus('error')
-      setFormFeedback('Veuillez remplir tous les champs.')
+      setFormFeedback('Please fill in all fields.')
       return
     }
 
@@ -73,7 +77,7 @@ export default function Home() {
 
       if (response.ok) {
         setFormStatus('success')
-        setFormFeedback('Message envoyé avec succès! Je vous répondrai bientôt.')
+        setFormFeedback('Message sent successfully! I will reply to you soon.')
         setFormEmail('')
         setFormMessage('')
 
@@ -84,11 +88,11 @@ export default function Home() {
         }, 5000)
       } else {
         setFormStatus('error')
-        setFormFeedback(data.error || 'Une erreur est survenue.')
+        setFormFeedback(data.error || 'An error occurred.')
       }
     } catch (error) {
       setFormStatus('error')
-      setFormFeedback('Erreur de connexion. Veuillez réessayer.')
+      setFormFeedback('Connection error. Please try again.')
     }
   }
 
@@ -152,21 +156,22 @@ export default function Home() {
 
         {/* Top Bar */}
         <div className="flex justify-between items-start px-[5vw] md:px-[7.3vw] pt-8">
-          <div>
-            <p className="text-xs tracking-[0.3em] text-white/50 uppercase"></p>
-          </div>
+          <ThemeToggle />
           <nav className="flex flex-col items-end z-50">
             <Image onClick={handleToggle} src={navOpen ? menu : close} alt="Menu" width={24} className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity" />
             {showMenu &&
               <ul className="flex flex-col items-end gap-2 mt-4 text-sm">
-                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.2s' : ''} both` }}>
-                  <a href="#home" className="text-white/70 hover:text-white transition-colors tracking-wider">HOME</a>
+                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.3s' : ''} both` }}>
+                  <a href="#home" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">HOME</a>
                 </li>
-                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.1s' : '0.1s'} both` }}>
-                  <a href="#projects" className="text-white/70 hover:text-white transition-colors tracking-wider">PROJECTS</a>
+                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.2s' : '0.1s'} both` }}>
+                  <a href="#projects" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">PROJECTS</a>
                 </li>
-                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0s' : '0.2s'} both` }}>
-                  <a href="#contact" className="text-white/70 hover:text-white transition-colors tracking-wider">CONTACT</a>
+                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.1s' : '0.2s'} both` }}>
+                  <a href="#about" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">ABOUT</a>
+                </li>
+                <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0s' : '0.3s'} both` }}>
+                  <a href="#contact" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">CONTACT</a>
                 </li>
               </ul>
             }
@@ -180,6 +185,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
+              style={{ y: portY }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex items-baseline"
             >
@@ -195,6 +201,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: -30 }}
               animate={{ opacity: 1, y: 0 }}
+              style={{ y: folioY }}
               transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
               className="flex items-baseline justify-end -mt-4 md:-mt-8"
             >
@@ -249,7 +256,7 @@ export default function Home() {
         {/* Scroll Container */}
         <div
           ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-scroll scrollbar-hide pb-8 -mx-[5vw] md:-mx-[7.3vw] px-[5vw] md:px-[7.3vw]"
+          className="flex gap-6 overflow-x-scroll scrollbar-hide pb-8 -mx-[5vw] md:-mx-[7.3vw] px-[5vw] md:px-[7.3vw] justify-center"
           style={{ scrollBehavior: 'smooth' }}
         >
 
@@ -259,20 +266,24 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0 }}
             viewport={{ once: true }}
-            onClick={() => window.open('https://lekebabiste.com', '_blank')}
-            className="flex-shrink-0 w-[300px] md:w-[380px] cursor-pointer group"
+            className="flex-shrink-0"
           >
-            <div className="aspect-[4/3] bg-[url(@/public/leKebabsite.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-500"></div>
-            <div className="mt-4">
-              <div className="flex items-baseline justify-between">
-                <h4 className="text-lg text-white">Le Kebabiste</h4>
-                <span className="text-xs text-white/30">01</span>
+            <TiltCard
+              onClick={() => window.open('https://lekebabiste.com', '_blank')}
+              className="w-[300px] md:w-[380px] cursor-pointer group"
+            >
+              <div className="aspect-[4/3] bg-[url(@/public/leKebabsite.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
+              <div className="mt-4">
+                <div className="flex items-baseline justify-between">
+                  <h4 className="text-lg text-white">Le Kebabiste</h4>
+                  <span className="text-xs text-white/30">01</span>
+                </div>
+                <p className="text-sm text-white/40 mt-1">Web Design & Development</p>
+                <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
+                  View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </span>
               </div>
-              <p className="text-sm text-white/40 mt-1">Web Design & Development</p>
-              <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
-                View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </span>
-            </div>
+            </TiltCard>
           </motion.div>
 
           {/* Project Card 2 */}
@@ -281,39 +292,49 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
             viewport={{ once: true }}
-            className="flex-shrink-0 w-[300px] md:w-[380px] cursor-pointer group"
+            className="flex-shrink-0"
           >
-            <div className="aspect-[4/3] bg-[url(@/public/SFK.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 group-hover:scale-[1.02] transition-all duration-500"></div>
-            <div className="mt-4">
-              <div className="flex items-baseline justify-between">
-                <h4 className="text-lg text-white">SFK Project</h4>
-                <span className="text-xs text-white/30">02</span>
+            <TiltCard
+              className="w-[300px] md:w-[380px] cursor-pointer group"
+            >
+              <div className="aspect-[4/3] bg-[url(@/public/SFK.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
+              <div className="mt-4">
+                <div className="flex items-baseline justify-between">
+                  <h4 className="text-lg text-white">SFK Project</h4>
+                  <span className="text-xs text-white/30">02</span>
+                </div>
+                <p className="text-sm text-white/40 mt-1">Branding & Web Development</p>
+                <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
+                  View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </span>
               </div>
-              <p className="text-sm text-white/40 mt-1">Branding & Web Development</p>
-              <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
-                View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </span>
-            </div>
+            </TiltCard>
           </motion.div>
 
-          {/* Project Card 3 */}
+          {/* Project Card 3 - Payko */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
-            className="flex-shrink-0 w-[300px] md:w-[380px] group"
+            className="flex-shrink-0"
           >
-            <div className="aspect-[4/3] border border-white/10 flex items-center justify-center group-hover:border-white/20 transition-colors">
-              <span className="text-white/20 text-sm tracking-widest">COMING SOON</span>
-            </div>
-            <div className="mt-4">
-              <div className="flex items-baseline justify-between">
-                <h4 className="text-lg text-white/40">Next Project</h4>
-                <span className="text-xs text-white/20">03</span>
+            <TiltCard
+              onClick={() => window.open('https://payko.app/', '_blank')}
+              className="w-[300px] md:w-[380px] cursor-pointer group"
+            >
+              <div className="aspect-[4/3] bg-[url(@/public/payko_project.png)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
+              <div className="mt-4">
+                <div className="flex items-baseline justify-between">
+                  <h4 className="text-lg text-white">Payko</h4>
+                  <span className="text-xs text-white/30">03</span>
+                </div>
+                <p className="text-sm text-white/40 mt-1">SaaS — Freelancer Invoicing</p>
+                <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
+                  View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
+                </span>
               </div>
-              <p className="text-sm text-white/30 mt-1">In Progress</p>
-            </div>
+            </TiltCard>
           </motion.div>
 
         </div>
@@ -380,6 +401,109 @@ export default function Home() {
                 {skill}
               </motion.span>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT SECTION */}
+      <section id="about" className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]">
+        <GradualSpacing text="ABOUT" />
+
+        <div className="mt-12 grid md:grid-cols-2 gap-12 md:gap-20">
+          {/* Bio */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <h3 className="text-3xl md:text-4xl font-[family-name:var(--font-dela-gothic-one)] leading-tight">
+              Passionate about code<br />
+              <span className="text-[var(--foreground)]/40">& design.</span>
+            </h3>
+            <p className="text-[var(--foreground)]/70 leading-relaxed text-lg">
+              I am Evan, a freelance web developer and designer. I create modern and
+              custom digital experiences for clients who want to stand out.
+            </p>
+            <p className="text-[var(--foreground)]/50 leading-relaxed">
+              Specialized in React, Next.js, and React Native, I transform your ideas into
+              performant and aesthetic applications. Each project is an opportunity
+              to push the boundaries of what is possible.
+            </p>
+
+            {/* CTA */}
+            <div className="pt-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 text-[var(--foreground)]/80 hover:text-[var(--foreground)] transition-colors group"
+              >
+                <span className="text-sm tracking-wider uppercase">Let's work together</span>
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Stats & Highlights */}
+          <div className="space-y-8">
+            {/* Parallax Stats */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="grid grid-cols-2 gap-6"
+            >
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={3} suffix="+" duration={1500} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Years of Experience</p>
+              </div>
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={15} suffix="+" duration={2000} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Projects Delivered</p>
+              </div>
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={100} suffix="%" duration={2500} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Satisfied Clients</p>
+              </div>
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={24} suffix="h" duration={1800} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Response Time</p>
+              </div>
+            </motion.div>
+
+            {/* Services with parallax */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              <p className="text-xs text-[var(--foreground)]/40 uppercase tracking-widest">What I do</p>
+              <div className="flex flex-wrap gap-3">
+                {['Websites', 'Mobile Apps', 'UI/UX Design', 'E-commerce', 'SEO'].map((service, i) => (
+                  <motion.span
+                    key={service}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 + i * 0.1 }}
+                    viewport={{ once: true }}
+                    className="px-4 py-2 bg-[var(--card-bg)] border border-[var(--border-color)] text-[var(--foreground)]/60 text-sm"
+                  >
+                    {service}
+                  </motion.span>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -467,15 +591,21 @@ export default function Home() {
           className="mt-24 grid grid-cols-3 gap-8 border-t border-white/10 pt-12"
         >
           <div className="text-center">
-            <p className="text-4xl md:text-5xl font-[family-name:var(--font-dela-gothic-one)] text-white">15+</p>
+            <p className="text-4xl md:text-5xl font-[family-name:var(--font-dela-gothic-one)] text-white">
+              <AnimatedCounter end={15} suffix="+" duration={2000} />
+            </p>
             <p className="text-sm text-white/40 mt-2">Projects</p>
           </div>
           <div className="text-center">
-            <p className="text-4xl md:text-5xl font-[family-name:var(--font-dela-gothic-one)] text-white">100%</p>
+            <p className="text-4xl md:text-5xl font-[family-name:var(--font-dela-gothic-one)] text-white">
+              <AnimatedCounter end={100} suffix="%" duration={2500} />
+            </p>
             <p className="text-sm text-white/40 mt-2">Satisfaction</p>
           </div>
           <div className="text-center">
-            <p className="text-4xl md:text-5xl font-[family-name:var(--font-dela-gothic-one)] text-white">3+</p>
+            <p className="text-4xl md:text-5xl font-[family-name:var(--font-dela-gothic-one)] text-white">
+              <AnimatedCounter end={3} suffix="+" duration={1500} />
+            </p>
             <p className="text-sm text-white/40 mt-2">Years Exp.</p>
           </div>
         </motion.div>
@@ -524,7 +654,10 @@ export default function Home() {
             <div>
               <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Status</p>
               <p className="text-lg text-white/80 flex items-center gap-2">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
                 Available for projects
               </p>
             </div>
@@ -567,7 +700,7 @@ export default function Home() {
               </motion.p>
             )}
 
-            <button
+            <MagneticButton
               type="submit"
               disabled={formStatus === 'loading'}
               className="mt-4 px-8 py-3 border border-white/30 text-white/80 hover:bg-white hover:text-black transition-all duration-300 tracking-wider text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-white/80 flex items-center gap-2"
@@ -583,7 +716,7 @@ export default function Home() {
               ) : (
                 'SEND MESSAGE'
               )}
-            </button>
+            </MagneticButton>
           </form>
         </div>
 

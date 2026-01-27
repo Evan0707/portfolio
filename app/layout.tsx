@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Dela_Gothic_One, Livvic } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./components/ThemeProvider";
+import SmoothScroll from "./components/SmoothScroll";
+import NoiseOverlay from "./components/NoiseOverlay";
+import AnimatedGradient from "./components/AnimatedGradient";
 
 const delaGothicOne = Dela_Gothic_One({
   weight: "400",
@@ -83,9 +87,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className="dark" data-theme="dark" suppressHydrationWarning>
       <body className={`${livvic.variable} ${delaGothicOne.variable} antialiased`}>
-        {children}
+        <ThemeProvider>
+          <SmoothScroll>
+            <NoiseOverlay />
+            <AnimatedGradient />
+            {children}
+          </SmoothScroll>
+        </ThemeProvider>
       </body>
     </html>
   );

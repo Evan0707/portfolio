@@ -2,11 +2,31 @@
 
 html {
   scroll-behavior: smooth;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :root {
   --background: #0A0A0B;
   --foreground: #ffffff;
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --grid-color: rgba(255, 255, 255, 0.04);
+  --skills-fade-from: #0a0a0b;
+}
+
+[data-theme="light"] {
+  --background: #f5f5f5;
+  --foreground: #0A0A0B;
+  --text-primary: rgba(10, 10, 11, 0.9);
+  --text-secondary: rgba(10, 10, 11, 0.7);
+  --text-muted: rgba(10, 10, 11, 0.4);
+  --border-color: rgba(10, 10, 11, 0.15);
+  --card-bg: rgba(10, 10, 11, 0.03);
+  --grid-color: rgba(10, 10, 11, 0.06);
+  --skills-fade-from: #f5f5f5;
 }
 
 @theme inline {
@@ -41,17 +61,80 @@ html {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0A0A0B;
-    --foreground: #ffffff;
+@keyframes blob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
   }
+
+  25% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  75% {
+    transform: translate(20px, 40px) scale(1.05);
+  }
+}
+
+.animate-blob {
+  animation: blob 15s ease-in-out infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme-aware text colors using Tailwind pattern */
+.text-theme {
+  color: var(--foreground);
+}
+
+.text-theme\/90 {
+  color: var(--text-primary);
+}
+
+.text-theme\/70 {
+  color: var(--text-secondary);
+}
+
+.text-theme\/50 {
+  color: var(--text-muted);
+}
+
+.text-theme\/40 {
+  color: var(--text-muted);
+}
+
+.text-theme\/30 {
+  color: color-mix(in srgb, var(--foreground) 30%, transparent);
+}
+
+.text-theme\/20 {
+  color: color-mix(in srgb, var(--foreground) 20%, transparent);
+}
+
+.border-theme {
+  border-color: var(--border-color);
+}
+
+.bg-theme-card {
+  background-color: var(--card-bg);
 }
 
 /* Custom Scrollbar */
@@ -61,24 +144,24 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(45, 45, 45, 0.6), rgba(82, 82, 82, 0.4));
+  background: var(--border-color);
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, rgba(96, 96, 96, 0.8), rgba(85, 85, 85, 0.6));
+  background: var(--text-muted);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(102, 102, 102, 0.5) rgba(255, 255, 255, 0.05);
+  scrollbar-color: var(--text-muted) var(--card-bg);
 }
 
 /* Scrollbar hide utility */
@@ -91,6 +174,114 @@ body {
   display: none;
 }
 
-/* h1 {
-    font-family: var(--font-heading);
-  } */
+/* Light mode color overrides for Tailwind classes */
+.light {
+
+  /* Text colors */
+  & .text-white {
+    color: var(--foreground);
+  }
+
+  & .text-white\/90,
+  & [class*="text-white/9"] {
+    color: var(--text-primary);
+  }
+
+  & .text-white\/80,
+  & [class*="text-white/8"] {
+    color: var(--text-secondary);
+  }
+
+  & .text-white\/70,
+  & [class*="text-white/7"] {
+    color: var(--text-secondary);
+  }
+
+  & .text-white\/60,
+  & [class*="text-white/6"] {
+    color: var(--text-muted);
+  }
+
+  & .text-white\/50,
+  & [class*="text-white/5"] {
+    color: var(--text-muted);
+  }
+
+  & .text-white\/40,
+  & [class*="text-white/4"] {
+    color: color-mix(in srgb, var(--foreground) 40%, transparent);
+  }
+
+  & .text-white\/30,
+  & [class*="text-white/3"] {
+    color: color-mix(in srgb, var(--foreground) 30%, transparent);
+  }
+
+  & .text-white\/20,
+  & [class*="text-white/2"] {
+    color: color-mix(in srgb, var(--foreground) 20%, transparent);
+  }
+
+  & .text-white\/10 {
+    color: color-mix(in srgb, var(--foreground) 10%, transparent);
+  }
+
+  /* Border colors */
+  & .border-white\/10,
+  & .border-white\/20,
+  & .border-white\/30 {
+    border-color: var(--border-color);
+  }
+
+  /* Background colors */
+  & .bg-white\/10,
+  & .bg-white\/20,
+  & .bg-white\/05 {
+    background-color: var(--card-bg);
+  }
+
+  & .bg-white {
+    background-color: var(--foreground);
+  }
+
+  /* Gradient overrides for skills section */
+  & .from-\[\#0a0a0b\] {
+    --tw-gradient-from: var(--skills-fade-from);
+  }
+
+  /* Hover states */
+  & .hover\:text-white:hover {
+    color: var(--foreground);
+  }
+
+  & .hover\:text-white\/70:hover {
+    color: var(--text-secondary);
+  }
+
+  & .hover\:text-white\/80:hover {
+    color: var(--text-secondary);
+  }
+
+  & .hover\:bg-white:hover {
+    background-color: var(--foreground);
+  }
+
+  & .hover\:border-white\/20:hover,
+  & .hover\:border-white\/30:hover {
+    border-color: var(--border-color);
+  }
+
+  /* Group hover states */
+  & .group-hover\:text-white\/70 {
+    color: var(--text-secondary);
+  }
+
+  & .group:hover .group-hover\:text-white\/70 {
+    color: var(--text-secondary);
+  }
+
+  /* Button text color fix for hover */
+  & .hover\:text-black:hover {
+    color: var(--background);
+  }
+}
