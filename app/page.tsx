@@ -147,7 +147,7 @@ export default function Home() {
   }
 
   return (
-    <div className="overflow-hidden relative">
+    <main className="overflow-hidden relative" role="main">
       {/* Interactive Grid Background */}
       <MouseGrid />
 
@@ -157,8 +157,8 @@ export default function Home() {
         {/* Top Bar */}
         <div className="flex justify-between items-start px-[5vw] md:px-[7.3vw] pt-8">
           <ThemeToggle />
-          <nav className="flex flex-col items-end z-50">
-            <Image onClick={handleToggle} src={navOpen ? menu : close} alt="Menu" width={24} className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity" />
+          <nav className="flex flex-col items-end z-50" role="navigation" aria-label="Menu principal">
+            <Image onClick={handleToggle} src={navOpen ? menu : close} alt={navOpen ? "Ouvrir le menu de navigation" : "Fermer le menu de navigation"} width={24} className="cursor-pointer opacity-70 hover:opacity-100 transition-opacity" />
             {showMenu &&
               <ul className="flex flex-col items-end gap-2 mt-4 text-sm">
                 <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.3s' : ''} both` }}>
@@ -189,7 +189,8 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex items-baseline"
             >
-              <span className="font-[family-name:var(--font-dela-gothic-one)] text-[18vw] md:text-[12vw] leading-none tracking-tight">
+              <h1 className="sr-only">Evan G - Web Designer & Developer Freelance Portfolio</h1>
+              <span aria-hidden="true" className="font-[family-name:var(--font-dela-gothic-one)] text-[18vw] md:text-[12vw] leading-none tracking-tight">
                 PORT
               </span>
               <span className="font-[family-name:var(--font-dela-gothic-one)] text-[18vw] md:text-[12vw] leading-none tracking-tight text-white/20">
@@ -211,8 +212,8 @@ export default function Home() {
             </motion.div>
 
             {/* Wave image centered */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <Image src={wave} alt="" className="w-[35vw] md:w-[20vw] opacity-90" />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+              <Image src={wave} alt="Élément décoratif vague" className="w-[35vw] md:w-[20vw] opacity-90" />
             </div>
           </div>
 
@@ -250,7 +251,8 @@ export default function Home() {
         </motion.div>
       </header>
 
-      <div id="projects" ref={projectsRef} className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]">
+      <section id="projects" ref={projectsRef} className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]" aria-labelledby="projects-title">
+        <h2 id="projects-title" className="sr-only">Mes Projets</h2>
         <GradualSpacing text="PROJECTS" />
 
         {/* Projects Container */}
@@ -344,7 +346,7 @@ export default function Home() {
           <div className="w-6 h-px bg-white/20"></div>
           <div className="w-6 h-px bg-white/20"></div>
         </div>
-      </div>
+      </section>
 
       {/* SKILLS SECTION */}
       <section className="mt-[200px] md:mt-[350px] overflow-hidden">
@@ -727,6 +729,6 @@ export default function Home() {
           <p>Designed & Developed with passion</p>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

@@ -1,0 +1,30 @@
+{
+ "name": "Evan G - Portfolio",
+ "short_name": "Evan G",
+ "description": "Portfolio d'Evan G, web designer et développeur freelance. Création de sites web modernes et applications sur-mesure.",
+ "start_url": "/",
+ "display": "standalone",
+ "background_color": "#0a0a0a",
+ "theme_color": "#0a0a0a",
+ "orientation": "portrait-primary",
+ "icons": [
+  {
+   "src": "/icon-192x192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "/icon-512x512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ],
+ "categories": [
+  "business",
+  "portfolio",
+  "development"
+ ],
+ "lang": "fr"
+}

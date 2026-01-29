@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import SmoothScroll from "./components/SmoothScroll";
 import NoiseOverlay from "./components/NoiseOverlay";
 import AnimatedGradient from "./components/AnimatedGradient";
+import JsonLd from "./components/JsonLd";
 
 const delaGothicOne = Dela_Gothic_One({
   weight: "400",
@@ -24,27 +25,38 @@ const livvic = Livvic({
 export const metadata: Metadata = {
   metadataBase: new URL('https://evan-g.com'),
   title: {
-    default: "Evan G | Web Designer & Developer",
+    default: "Evan G | Web Designer & Developer Freelance",
     template: "%s | Evan G"
   },
-  description: "Portfolio d'Evan G, web designer et développeur freelance passionné. Création de sites web modernes, applications React/Next.js et solutions sur-mesure.",
+  description: "Portfolio d'Evan G, web designer et développeur freelance passionné. Création de sites web modernes, applications React/Next.js, React Native et solutions sur-mesure.",
   keywords: [
     "web designer",
     "développeur web",
     "freelance",
     "React",
     "Next.js",
+    "React Native",
     "portfolio",
     "création site web",
     "développeur freelance",
     "Evan G",
     "web developer",
-    "UI/UX designer"
+    "UI/UX designer",
+    "développeur mobile",
+    "application mobile",
+    "site web moderne",
+    "freelance France"
   ],
   authors: [{ name: "Evan G", url: "https://evan-g.com" }],
   creator: "Evan G",
+  publisher: "Evan G",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
-    title: "Evan G | Web Designer & Developer",
+    title: "Evan G | Web Designer & Developer Freelance",
     description: "Portfolio d'Evan G, web designer et développeur freelance passionné. Création de sites web modernes et sur-mesure.",
     url: "https://evan-g.com",
     siteName: "Evan G Portfolio",
@@ -61,9 +73,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Evan G | Web Designer & Developer",
+    title: "Evan G | Web Designer & Developer Freelance",
     description: "Portfolio d'Evan G, web designer et développeur freelance passionné.",
     images: ["/og-image.png"],
+    creator: "@evang_creative",
   },
   robots: {
     index: true,
@@ -79,6 +92,21 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://evan-g.com",
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/manifest.webmanifest',
+  other: {
+    'theme-color': '#0a0a0a',
+    'msapplication-TileColor': '#0a0a0a',
+  },
 };
 
 export default function RootLayout({
@@ -88,6 +116,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="dark" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <JsonLd />
+      </head>
       <body className={`${livvic.variable} ${delaGothicOne.variable} antialiased`}>
         <ThemeProvider>
           <SmoothScroll>
@@ -100,3 +131,4 @@ export default function RootLayout({
     </html>
   );
 }
+
