@@ -644,7 +644,7 @@ export default function Home() {
             </div>
             <div>
               <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Fiverr</p>
-              <Link href="https://fr.fiverr.com/s/VYKjYYZ" target="_blank" className="text-lg text-white/80 hover:text-white transition-colors">
+              <Link href="https://fr.fiverr.com/evbuild" target="_blank" className="text-lg text-white/80 hover:text-white transition-colors">
                 View Profile →
               </Link>
             </div>
