@@ -54,7 +54,7 @@ export default function Home() {
 
     if (!formEmail || !formMessage) {
       setFormStatus('error')
-      setFormFeedback('Please fill in all fields.')
+      setFormFeedback('Veuillez remplir tous les champs.')
       return
     }
 
@@ -77,7 +77,7 @@ export default function Home() {
 
       if (response.ok) {
         setFormStatus('success')
-        setFormFeedback('Message sent successfully! I will reply to you soon.')
+        setFormFeedback('Message envoyé ! Je vous répondrai très bientôt.')
         setFormEmail('')
         setFormMessage('')
 
@@ -88,11 +88,11 @@ export default function Home() {
         }, 5000)
       } else {
         setFormStatus('error')
-        setFormFeedback(data.error || 'An error occurred.')
+        setFormFeedback(data.error || 'Une erreur est survenue.')
       }
     } catch (error) {
       setFormStatus('error')
-      setFormFeedback('Connection error. Please try again.')
+      setFormFeedback('Erreur de connexion. Veuillez réessayer.')
     }
   }
 
@@ -162,13 +162,13 @@ export default function Home() {
             {showMenu &&
               <ul className="flex flex-col items-end gap-2 mt-4 text-sm">
                 <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.3s' : ''} both` }}>
-                  <a href="#home" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">HOME</a>
+                  <a href="#home" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">ACCUEIL</a>
                 </li>
                 <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.2s' : '0.1s'} both` }}>
-                  <a href="#projects" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">PROJECTS</a>
+                  <a href="#projects" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">PROJETS</a>
                 </li>
                 <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0.1s' : '0.2s'} both` }}>
-                  <a href="#about" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">ABOUT</a>
+                  <a href="#about" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">À PROPOS</a>
                 </li>
                 <li style={{ animation: `${isClosing ? 'slideOutToRight' : 'slideInFromRight'} 0.3s ease-out ${isClosing ? '0s' : '0.3s'} both` }}>
                   <a href="#contact" className="text-[var(--foreground)]/70 hover:text-[var(--foreground)] transition-colors tracking-wider">CONTACT</a>
@@ -189,7 +189,8 @@ export default function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex items-baseline"
             >
-              <h1 className="sr-only">Evan G - Web Designer & Developer Freelance Portfolio</h1>
+              {/* <h1 className="sr-only">Evan G - Web Designer & Developer Freelance Portfolio</h1> */}
+              <h1 className="sr-only">Evan Gery - Web Designer & Developer Portfolio</h1>
               <span aria-hidden="true" className="font-[family-name:var(--font-dela-gothic-one)] text-[18vw] md:text-[12vw] leading-none tracking-tight">
                 PORT
               </span>
@@ -224,7 +225,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-8 text-white/50 text-sm md:text-base tracking-[0.2em] uppercase"
           >
-            Evan G — Creative Developer
+            Evan Gery — Développeur Full Stack
           </motion.p>
         </div>
 
@@ -235,7 +236,7 @@ export default function Home() {
             <p>Web Developer</p>
           </div>
           <div className="text-xs text-white/40 text-right">
-            <p>evan.g.creative@gmail.com</p>
+            <p>evan.gery07@gmail.com</p>
           </div>
         </div>
 
@@ -253,7 +254,7 @@ export default function Home() {
 
       <section id="projects" ref={projectsRef} className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]" aria-labelledby="projects-title">
         <h2 id="projects-title" className="sr-only">Mes Projets</h2>
-        <GradualSpacing text="PROJECTS" />
+        <GradualSpacing text="PROJETS" />
 
         {/* Projects Container */}
         <div
@@ -261,7 +262,7 @@ export default function Home() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
 
-          {/* Project Card 1 */}
+          {/* Project Card 1 - openChantier */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -270,24 +271,24 @@ export default function Home() {
             className="flex-shrink-0"
           >
             <TiltCard
-              onClick={() => window.open('https://lekebabiste.com', '_blank')}
+              onClick={() => window.open('https://openchantier.com', '_blank')}
               className="w-full cursor-pointer group"
             >
-              <div className="aspect-[4/3] bg-[url(@/public/leKebabsite.jpg)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
+              <div className="aspect-[4/3] bg-[url(@/public/openchantier_project.png)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
               <div className="mt-4">
                 <div className="flex items-baseline justify-between">
-                  <h4 className="text-lg text-white">Le Kebabiste</h4>
+                  <h4 className="text-lg text-white">openChantier</h4>
                   <span className="text-xs text-white/30">01</span>
                 </div>
-                <p className="text-sm text-white/40 mt-1">Web Design & Development</p>
+                <p className="text-sm text-white/40 mt-1">SaaS — Gestion de chantier</p>
                 <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
-                  View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  Voir le projet <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </span>
               </div>
             </TiltCard>
           </motion.div>
 
-          {/* Project Card 2 */}
+          {/* Project Card 2 - SFK */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -306,33 +307,7 @@ export default function Home() {
                 </div>
                 <p className="text-sm text-white/40 mt-1">Branding & Web Development</p>
                 <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
-                  View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
-                </span>
-              </div>
-            </TiltCard>
-          </motion.div>
-
-          {/* Project Card 3 - Payko */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="flex-shrink-0"
-          >
-            <TiltCard
-              onClick={() => window.open('https://payko.app/', '_blank')}
-              className="w-full cursor-pointer group"
-            >
-              <div className="aspect-[4/3] bg-[url(@/public/payko_project.png)] bg-cover bg-center border border-white/10 grayscale group-hover:grayscale-0 transition-all duration-500"></div>
-              <div className="mt-4">
-                <div className="flex items-baseline justify-between">
-                  <h4 className="text-lg text-white">Payko</h4>
-                  <span className="text-xs text-white/30">03</span>
-                </div>
-                <p className="text-sm text-white/40 mt-1">SaaS — Freelancer Invoicing</p>
-                <span className="text-xs text-white/50 mt-3 flex items-center gap-1 group-hover:text-white/70 transition-colors">
-                  View Project <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  Voir le projet <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </span>
               </div>
             </TiltCard>
@@ -344,14 +319,13 @@ export default function Home() {
         <div className="flex justify-center gap-3 mt-8">
           <div className="w-6 h-px bg-white/50"></div>
           <div className="w-6 h-px bg-white/20"></div>
-          <div className="w-6 h-px bg-white/20"></div>
         </div>
       </section>
 
       {/* SKILLS SECTION */}
       <section className="mt-[200px] md:mt-[350px] overflow-hidden">
         <div className="px-[5vw] md:px-[7.3vw]">
-          <GradualSpacing text="SKILLS" />
+          <GradualSpacing text="COMPÉTENCES" />
         </div>
 
         {/* Skills Marquee */}
@@ -374,8 +348,8 @@ export default function Home() {
                   { name: 'React', sub: 'Frontend' },
                   { name: 'React Native', sub: 'Mobile' },
                   { name: 'Next.js', sub: 'Framework' },
-                  { name: 'Supabase', sub: 'Backend' },
-                  { name: 'PostgreSQL', sub: 'Database' },
+                  { name: 'Supabase', sub: 'Back-end' },
+                  { name: 'PostgreSQL', sub: 'Base de données' },
                 ].map((skill) => (
                   <div key={`${groupIndex}-${skill.name}`} className="flex-shrink-0 text-center">
                     <p className="text-4xl md:text-6xl font-[family-name:var(--font-dela-gothic-one)] text-white/10 hover:text-white/30 transition-colors duration-500 cursor-default whitespace-nowrap">
@@ -410,7 +384,7 @@ export default function Home() {
 
       {/* ABOUT SECTION */}
       <section id="about" className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]">
-        <GradualSpacing text="ABOUT" />
+        <GradualSpacing text="À PROPOS" />
 
         <div className="mt-12 grid md:grid-cols-2 gap-12 md:gap-20">
           {/* Bio */}
@@ -422,17 +396,24 @@ export default function Home() {
             className="space-y-6"
           >
             <h3 className="text-3xl md:text-4xl font-[family-name:var(--font-dela-gothic-one)] leading-tight">
-              Passionate about code<br />
-              <span className="text-[var(--foreground)]/40">& design.</span>
+              Passionné par le code<br />
+              <span className="text-[var(--foreground)]/40">& le design.</span>
             </h3>
-            <p className="text-[var(--foreground)]/70 leading-relaxed text-lg">
+            {/* <p className="text-[var(--foreground)]/70 leading-relaxed text-lg">
               I am Evan, a freelance web developer and designer. I create modern and
               custom digital experiences for clients who want to stand out.
+            </p> */}
+            <p className="text-[var(--foreground)]/70 leading-relaxed text-lg">
+              Je suis Evan, développeur et designer web passionné, actuellement à la
+              recherche d'une alternance pour progresser et contribuer à des projets ambitieux.
             </p>
             <p className="text-[var(--foreground)]/50 leading-relaxed">
-              Specialized in React, Next.js, and React Native, I transform your ideas into
+              {/* Specialized in React, Next.js, and React Native, I transform your ideas into
               performant and aesthetic applications. Each project is an opportunity
-              to push the boundaries of what is possible.
+              to push the boundaries of what is possible. */}
+              En formation en développement web, je cherche une alternance où je pourrai
+              mettre en pratique mes compétences en React, Next.js et React Native
+              au sein d'une équipe et continuer à repousser mes limites.
             </p>
 
             {/* CTA */}
@@ -441,7 +422,8 @@ export default function Home() {
                 href="#contact"
                 className="inline-flex items-center gap-2 text-[var(--foreground)]/80 hover:text-[var(--foreground)] transition-colors group"
               >
-                <span className="text-sm tracking-wider uppercase">Let's work together</span>
+                {/* <span className="text-sm tracking-wider uppercase">Let's work together</span> */}
+                <span className="text-sm tracking-wider uppercase">Me contacter</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
             </div>
@@ -457,6 +439,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="grid grid-cols-2 gap-6"
             >
+              {/*
               <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
                 <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
                   <AnimatedCounter end={3} suffix="+" duration={1500} />
@@ -481,6 +464,31 @@ export default function Home() {
                 </p>
                 <p className="text-sm text-[var(--foreground)]/40 mt-2">Response Time</p>
               </div>
+              */}
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={3} suffix="+" duration={1500} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Ans avec React</p>
+              </div>
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={2} suffix="+" duration={2000} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Ans avec Next.js</p>
+              </div>
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={1} suffix="+" duration={2500} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">An avec React Native</p>
+              </div>
+              <div className="border border-[var(--border-color)] p-6 hover:border-[var(--foreground)]/30 transition-colors">
+                <p className="text-4xl font-[family-name:var(--font-dela-gothic-one)]">
+                  <AnimatedCounter end={2} suffix="+" duration={1800} />
+                </p>
+                <p className="text-sm text-[var(--foreground)]/40 mt-2">Ans avec TypeScript</p>
+              </div>
             </motion.div>
 
             {/* Services with parallax */}
@@ -491,9 +499,9 @@ export default function Home() {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <p className="text-xs text-[var(--foreground)]/40 uppercase tracking-widest">What I do</p>
+              <p className="text-xs text-[var(--foreground)]/40 uppercase tracking-widest">Ce que je fais</p>
               <div className="flex flex-wrap gap-3">
-                {['Websites', 'Mobile Apps', 'UI/UX Design', 'E-commerce', 'SEO'].map((service, i) => (
+                {['Sites web', 'Apps mobiles', 'UI/UX Design', 'E-commerce', 'SEO'].map((service, i) => (
                   <motion.span
                     key={service}
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -511,7 +519,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TESTIMONIALS SECTION */}
+      {/* TESTIMONIALS SECTION — disabled while applying for an apprenticeship (fake testimonials). Re-enable by changing `false` to `true`. */}
+      {false && (
       <section className="mt-[200px] md:mt-[350px] px-[5vw] md:px-[7.3vw]">
         <GradualSpacing text="WORDS" />
 
@@ -613,6 +622,7 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+      )}
 
       {/* CONTACT SECTION */}
       <section id="contact" className="mt-[200px] md:mt-[350px] mb-[200px] px-[5vw] md:px-[7.3vw]">
@@ -625,10 +635,10 @@ export default function Home() {
           viewport={{ once: true }}
         >
           <h2 className="font-[family-name:var(--font-dela-gothic-one)] text-[12vw] md:text-[8vw] leading-none tracking-tight">
-            LET'S
+            PARLONS
           </h2>
           <h2 className="font-[family-name:var(--font-dela-gothic-one)] text-[12vw] md:text-[8vw] leading-none tracking-tight text-white/20 -mt-2">
-            TALK
+            ENSEMBLE
           </h2>
         </motion.div>
 
@@ -638,10 +648,11 @@ export default function Home() {
           <div className="space-y-8">
             <div>
               <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Email</p>
-              <a href="mailto:evan.g.creative@gmail.com" className="text-lg text-white/80 hover:text-white transition-colors">
-                evan.g.creative@gmail.com
+              <a href="mailto:evan.gery07@gmail.com" className="text-lg text-white/80 hover:text-white transition-colors">
+                evan.gery07@gmail.com
               </a>
             </div>
+            {/*
             <div>
               <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Fiverr</p>
               <Link href="https://fr.fiverr.com/evbuild" target="_blank" className="text-lg text-white/80 hover:text-white transition-colors">
@@ -654,14 +665,16 @@ export default function Home() {
                 View Profile →
               </Link>
             </div>
+            */}
             <div>
-              <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Status</p>
+              <p className="text-xs text-white/40 uppercase tracking-widest mb-2">Statut</p>
               <p className="text-lg text-white/80 flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                 </span>
-                Available for projects
+                {/* Available for projects */}
+                Disponible en alternance
               </p>
             </div>
           </div>
@@ -669,14 +682,14 @@ export default function Home() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="text-xs text-white/40 uppercase tracking-widest block mb-2">Your Email</label>
+              <label className="text-xs text-white/40 uppercase tracking-widest block mb-2">Votre email</label>
               <input
                 type="email"
                 value={formEmail}
                 onChange={(e) => setFormEmail(e.target.value)}
                 disabled={formStatus === 'loading'}
                 className="w-full bg-transparent border-b border-white/20 pb-3 text-white focus:border-white/60 focus:outline-none transition-colors disabled:opacity-50"
-                placeholder="hello@example.com"
+                placeholder="hello@exemple.com"
                 required
               />
             </div>
@@ -687,7 +700,7 @@ export default function Home() {
                 onChange={(e) => setFormMessage(e.target.value)}
                 disabled={formStatus === 'loading'}
                 className="w-full bg-transparent border-b border-white/20 pb-3 text-white focus:border-white/60 focus:outline-none transition-colors resize-none h-32 disabled:opacity-50"
-                placeholder="Tell me about your project..."
+                placeholder="Parlez-moi de votre projet..."
                 required
               ></textarea>
             </div>
@@ -714,10 +727,10 @@ export default function Home() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  SENDING...
+                  ENVOI...
                 </>
               ) : (
-                'SEND MESSAGE'
+                'ENVOYER'
               )}
             </MagneticButton>
           </form>
@@ -725,8 +738,7 @@ export default function Home() {
 
         {/* Footer */}
         <div className="mt-24 pt-8 border-t border-white/10 flex justify-between items-center text-xs text-white/30">
-          <p>© 2026 Evan G</p>
-          <p>Designed & Developed with passion</p>
+          <p>© 2026 Evan Gery</p>
         </div>
       </section>
     </main>
