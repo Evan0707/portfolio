@@ -501,7 +501,7 @@ export default function Home() {
             >
               <p className="text-xs text-[var(--foreground)]/40 uppercase tracking-widest">Ce que je fais</p>
               <div className="flex flex-wrap gap-3">
-                {['Sites web', 'Apps mobiles', 'UI/UX Design', 'E-commerce', 'SEO'].map((service, i) => (
+                {['Sites web', 'Apps mobiles', 'UI/UX Design'].map((service, i) => (
                   <motion.span
                     key={service}
                     initial={{ opacity: 0, scale: 0.9 }}
