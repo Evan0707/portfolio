@@ -1,0 +1,4 @@
+# Générés par build.mjs (images encodées en base64, ~800 Ko).
+# Régénérer avec : node figma-plugin/build.mjs
+code.js
+src/assets.js

@@ -1,0 +1,16 @@
+{
+  "name": "Portfolio Evan Gery",
+  "id": "portfolio-evan-gery-figma-export",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "networkAccess": { "allowedDomains": ["none"] },
+  "menu": [
+    { "name": "Tout generer (recommande)", "command": "all" },
+    { "separator": true },
+    { "name": "Desktop 1440 - Dark", "command": "desktop-dark" },
+    { "name": "Desktop 1440 - Light", "command": "desktop-light" },
+    { "name": "Mobile 390 - Dark", "command": "mobile-dark" },
+    { "name": "Design System", "command": "design-system" }
+  ]
+}

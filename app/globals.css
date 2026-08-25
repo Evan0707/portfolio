@@ -15,6 +15,10 @@ html {
   --card-bg: rgba(255, 255, 255, 0.03);
   --grid-color: rgba(255, 255, 255, 0.04);
   --skills-fade-from: #0a0a0b;
+
+  /* Bande « Parcours » : le thème s'inverse le temps d'une section. */
+  --band-bg: #f5f5f5;
+  --band-fg: #0A0A0B;
 }
 
 [data-theme="light"] {
@@ -27,11 +31,24 @@ html {
   --card-bg: rgba(10, 10, 11, 0.03);
   --grid-color: rgba(10, 10, 11, 0.06);
   --skills-fade-from: #f5f5f5;
+
+  --band-bg: #0A0A0B;
+  --band-fg: #ffffff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  /*
+   * Échelle de couleur unique, pilotée par le thème. Les modificateurs
+   * d'opacité de Tailwind fonctionnent dessus : text-fg/40, border-fg/10,
+   * bg-fg/3 — plus besoin d'écrire text-white/40 puis de le rattraper
+   * avec des overrides `.light`.
+   */
+  --color-fg: var(--foreground);
+  --color-bg: var(--background);
+  --color-band: var(--band-bg);
+  --color-bandfg: var(--band-fg);
   --font-sans: var(--font-livvic), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-heading: var(--font-dela-gothic-one), var(--font-sans);
@@ -283,5 +300,25 @@ body {
   /* Button text color fix for hover */
   & .hover\:text-black:hover {
     color: var(--background);
+  }
+}
+/* ---------------------------------------------------------------------------
+ * Accessibilité : respecter le réglage système « réduire les animations ».
+ * Les animations pilotées par JS sont neutralisées côté composant via
+ * useReducedMotion() ; ceci couvre tout ce qui est purement CSS.
+ * ------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 }
