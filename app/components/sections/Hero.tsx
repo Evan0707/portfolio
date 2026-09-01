@@ -132,7 +132,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-8 flex flex-wrap items-center justify-center gap-4"
         >
-          <CvButton />
+          {/* <CvButton /> */}
           <LinkedinButton />
         </motion.div>
       </div>
