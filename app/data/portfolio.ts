@@ -38,7 +38,7 @@ export const links = {
   linkedin: ok<string | null>('https://www.linkedin.com/in/evan-gery-56a46928a/'),
   linkedinLabel: 'in/evan-gery',
   cv: ok<string | null>('/Evan_GERY_CV.pdf'),
-  // cvFileName: 'Evan_GERY_CV.pdf',
+  cvFileName: 'Evan_GERY_CV.pdf',
 }
 
 // ---------------------------------------------------------------- parcours
