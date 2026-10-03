@@ -4,8 +4,8 @@ import { availability } from '@/app/data/portfolio'
 /**
  * Bandeau permanent en haut de page.
  *
- * C'est le point n°1 de l'audit : un recruteur a besoin des dates, du rythme
- * et de la zone de mobilité avant de lire quoi que ce soit d'autre.
+ * C'était le point n°1 de l'audit : dire la disponibilité avant tout le reste.
+ * L'alternance trouvée, il affiche la situation du moment et la zone de mobilité.
  */
 export default function StatusBar() {
   return (
@@ -16,15 +16,7 @@ export default function StatusBar() {
             <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
           </span>
-          <span className="truncate">
-            {availability.headline}
-            <span className="hidden lg:inline">
-              {' · '}
-              <span className={availability.rhythm.todo ? 'text-fg/35' : undefined}>
-                {availability.rhythm.value}
-              </span>
-            </span>
-          </span>
+          <span className="truncate">{availability.headline}</span>
         </p>
         <p className="hidden md:block shrink-0 text-[12px] leading-4 tracking-[0.05em] text-fg/60">
           {availability.area}

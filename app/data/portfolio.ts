@@ -25,13 +25,15 @@ export const profile = {
   portraitSize: { width: 311, height: 391 },
 }
 
+/** L'entreprise de l'alternance : écrite ici, reprise partout. */
+const employer = 'Cyberg'
+
+/** L'alternance est trouvée : le bandeau dit où j'en suis, plus ce que je cherche. */
 export const availability = {
-  headline: 'Alternance BUT 3 · Rentrée septembre 2026',
-  /** À confirmer par Evan : le rythme exact du BUT 3. */
-  rhythm: todo('Rythme IUT de Valence'),
+  headline: `En alternance chez ${employer} · BUT 3 Informatique`,
   area: 'Valence / Lyon / Annonay - Permis B',
-  short: 'Disponible — rentrée septembre 2026',
-  detail: 'BUT 3 Informatique · 12 mois',
+  short: `En cours chez ${employer}`,
+  detail: 'BUT 3 Informatique · 2026 — 2027',
 }
 
 export const links = {
@@ -56,7 +58,7 @@ export const milestones: Milestone[] = [
   {
     year: '2026 — 2027',
     title: "BUT 3 Informatique — Réalisation d'applications",
-    subtitle: 'IUT de Valence',
+    subtitle: `IUT de Valence · en alternance chez ${employer}`,
     current: true,
   },
   {
@@ -188,7 +190,7 @@ export const skillFamilies = [
 
 export const bio = [
   {
-    text: "Je suis Evan, étudiant en BUT Informatique à l'IUT de Valence, parcours Réalisation d'applications. Je cherche une alternance pour ma troisième année, à partir de septembre 2026.",
+    text: `Je suis Evan, étudiant en BUT Informatique à l'IUT de Valence, parcours Réalisation d'applications. Je fais ma troisième année en alternance chez ${employer}.`,
     lead: true,
   },
   {
@@ -197,10 +199,13 @@ export const bio = [
   },
 ]
 
-/** PLACEHOLDER — brouillon. À réécrire avec les mots d'Evan. */
-export const lookingFor = todo(
-  "Je cherche une alternance pour développer mes compétences sur des projets réels, découvrir de nouvelles technologies et continuer à travailler le design autant que le code."
-)
+/** Le studio : mon activité indépendante, servie par ce même site sous /studio. */
+export const studio = {
+  name: 'Evan G. Studio',
+  text: "À côté de mon alternance, je conçois des logiciels sur mesure pour les PME : applications métier, applications mobiles, automatisations.",
+  cta: 'Découvrir le studio',
+  href: '/studio',
+}
 
 /** Chiffres vérifiables — remplacent les « 3+ ans avec React » du CV. */
 export const stats = [

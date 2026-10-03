@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { UserFocus, ArrowRight } from '@phosphor-icons/react/dist/ssr'
 import AnimatedCounter from '@/app/components/AnimatedCounter'
 import SectionTitle from '@/app/components/ui/SectionTitle'
-import { profile, bio, lookingFor, stats } from '@/app/data/portfolio'
+import { profile, bio, studio, stats } from '@/app/data/portfolio'
 
 export default function APropos() {
   const reduce = useReducedMotion()
@@ -38,7 +38,7 @@ export default function APropos() {
             </p>
           ))}
 
-          <LookingFor />
+          <Studio />
         </motion.div>
       </div>
 
@@ -99,19 +99,17 @@ function Portrait() {
   )
 }
 
-function LookingFor() {
+/** L'alternance est trouvée : ce bloc, qui disait ce que je cherchais, mène au studio. */
+function Studio() {
   return (
     <div className="border border-fg/10 bg-fg/3 px-7 py-6">
-      <p className="text-[11px] uppercase tracking-[0.1em] text-fg/40">
-        Ce que je cherche
-        {lookingFor.todo && <span className="ml-2 normal-case tracking-normal text-fg/20 italic">brouillon</span>}
-      </p>
-      <p className="mt-3.5 text-[15px] leading-[25px] text-fg/60">{lookingFor.value}</p>
+      <p className="text-[11px] uppercase tracking-[0.1em] text-fg/40">{studio.name}</p>
+      <p className="mt-3.5 text-[15px] leading-[25px] text-fg/60">{studio.text}</p>
       <a
-        href="#contact"
+        href={studio.href}
         className="group mt-5 inline-flex items-center gap-2 text-sm uppercase tracking-wider text-fg/80 hover:text-fg transition-colors"
       >
-        Me contacter
+        {studio.cta}
         <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
       </a>
     </div>

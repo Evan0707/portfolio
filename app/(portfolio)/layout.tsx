@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Dela_Gothic_One, Livvic } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./components/ThemeProvider";
-import SmoothScroll from "./components/SmoothScroll";
-import NoiseOverlay from "./components/NoiseOverlay";
-import AnimatedGradient from "./components/AnimatedGradient";
-import JsonLd from "./components/JsonLd";
+import { ThemeProvider } from "@/app/components/ThemeProvider";
+import SmoothScroll from "@/app/components/SmoothScroll";
+import NoiseOverlay from "@/app/components/NoiseOverlay";
+import AnimatedGradient from "@/app/components/AnimatedGradient";
+import JsonLd from "@/app/components/JsonLd";
 
 const delaGothicOne = Dela_Gothic_One({
   weight: "400",
@@ -41,7 +41,6 @@ export const metadata: Metadata = {
     "portfolio",
     "création site web",
     // "développeur freelance",
-    "alternance développeur web",
     "Evan Gery",
     "web developer",
     "UI/UX designer",

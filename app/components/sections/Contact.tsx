@@ -98,13 +98,7 @@ export default function Contact() {
               </span>
               {availability.short}
             </p>
-            <p className="mt-1.5 text-sm text-fg/40">
-              {availability.detail}
-              {' · '}
-              <span className={availability.rhythm.todo ? 'text-fg/25 italic' : undefined}>
-                {availability.rhythm.value}
-              </span>
-            </p>
+            <p className="mt-1.5 text-sm text-fg/40">{availability.detail}</p>
           </Field>
 
           <Field icon={<MapPin size={14} />} label="Localisation & mobilité">

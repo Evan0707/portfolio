@@ -14,6 +14,7 @@ const NAV = [
   { href: '#skills', label: 'Compétences' },
   { href: '#about', label: 'À propos' },
   { href: '#contact', label: 'Contact' },
+  { href: '/studio', label: 'Studio' },
 ]
 
 export default function Hero() {
